@@ -1,4 +1,4 @@
-(function() {
+function() {
     // Основные настройки плагина
     const PLUGIN_ID = 'kinopoisk-ui';
     const PLUGIN_NAME = 'Kinopoisk UI Style';
