@@ -1,0 +1,95 @@
+(function() {
+    // Основные настройки плагина
+    const PLUGIN_ID = 'kinopoisk-ui';
+    const PLUGIN_NAME = 'Kinopoisk UI Style';
+
+    // Создание и регистрация плагина
+    const kinopoiskUIPlugin = {
+        id: PLUGIN_ID,
+        name: PLUGIN_NAME,
+        description: 'Изменяет интерфейс Lampa в стиле Кинопоиска',
+        version: '1.0.0',
+        // Применение кастомных стилей
+        applyStyles: function() {
+            const style = document.createElement('style');
+            style.textContent = 
+                /* Основные стили, похожие на Кинопоиск */
+                body, .app, .background-layer {
+                    background-color: #1F1B2E;
+                    color: #FFFFFF;
+                }
+
+                /* Стили для заголовков */
+                .card__title, .card__age, .card__icon {
+                    color: #FFC107;
+                }
+
+                /* Кнопки */
+                .button, .simple-button {
+                    background-color: #FF6D00;
+                    color: #FFFFFF;
+                    border-radius: 20px;
+                }
+
+                .button:hover, .simple-button:hover {
+                    background-color: #E64A19;
+                }
+
+                /* Стили для карточек фильмов */
+                .card {
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                .card__view {
+                    border-radius: 10px;
+                }
+
+                /* Фон и элементы в стиле Кинопоиска */
+                .content__title, .more, .filter--genre {
+                    color: #FFC107;
+                }
+
+                .card__age {
+                    background-color: rgba(255, 193, 7, 0.9);
+                    color: #1F1B2E;
+                }
+            ;
+            document.head.appendChild(style);
+        },
+
+        // Функция для изменения элементов интерфейса
+        modifyUI: function() {
+            // Пример изменения заголовка
+            const header = document.querySelector('.header__logo');
+            if (header) {
+                header.textContent = 'Kinopoisk';
+                header.style.color = '#FFC107';
+            }
+
+            // Пример изменения иконки приложения
+            const appIcon = document.querySelector('.header__logo img');
+            if (appIcon) {
+                appIcon.src = 'https://www.kinopoisk.ru/favicon.ico';
+                appIcon.style.width = '36px';
+            }
+
+            // Пример изменения интерфейса главного меню
+            const menuItems = document.querySelectorAll('.menu__item');
+            menuItems.forEach(item => {
+                item.style.backgroundColor = '#1F1B2E';
+                item.style.color = '#FFC107';
+            });
+        }
+    };
+
+    // Регистрация плагина в Lampa
+    window.Lampa = window.Lampa || {};
+    window.Lampa.Plugins = window.Lampa.Plugins || [];
+    window.Lampa.Plugins.push(kinopoiskUIPlugin);
+
+    // Автоматическая загрузка плагина
+    document.addEventListener('DOMContentLoaded', () => {
+        kinopoiskUIPlugin.onLoad();
+    });
+})();
